@@ -1,0 +1,57 @@
+# ─── Python ───
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+*.whl
+venv/
+.venv/
+env/
+.env
+
+# ─── Node / Frontend ───
+node_modules/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+.vercel
+
+# ─── IDE ───
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ─── Storage & Runtime ───
+storage/
+*.sqlite
+*.db
+*.wav
+*.mp4
+*.mp3
+*.ass
+*.srt
+*.vtt
+logs/
+*.log
+*.jsonl
+
+# ─── Environment ───
+.env
+.env.local
+.env.production
+.env.development
+
+# ─── OS ───
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,18 @@
+# === AI Pipeline (v4.3) ===
+whisperx
+faster-whisper
+groq
+sentence-transformers
+pyspellchecker
+librosa
+soundfile
+numpy
+langdetect
+
+# === Backend (Full Stack - NEW) ===
+fastapi
+uvicorn[standard]
+aiosqlite
+python-multipart
+aiofiles
+python-dotenv
