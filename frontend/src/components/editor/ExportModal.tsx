@@ -22,7 +22,7 @@ const options: ExportOption[] = [
   {
     format: "mp4",
     label: "Burned MP4",
-    description: "Video with captions burned in via FFmpeg",
+    description: "Video with pixel-perfect burned captions",
     icon: <Film size={20} />,
   },
   {

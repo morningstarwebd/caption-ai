@@ -37,7 +37,12 @@ export default function CaptionOverlay() {
   const textShadowParts: string[] = [];
   if (themeStyle.outline && themeStyle.outlineColor) {
     const c = themeStyle.outlineColor;
-    textShadowParts.push(`2px 2px 0 ${c}`, `-2px -2px 0 ${c}`, `2px -2px 0 ${c}`, `-2px 2px 0 ${c}`);
+    textShadowParts.push(
+      `2px 2px 0 ${c}`, `-2px -2px 0 ${c}`,
+      `2px -2px 0 ${c}`, `-2px 2px 0 ${c}`,
+      `1px 1px 0 ${c}`, `-1px -1px 0 ${c}`,
+      `1px -1px 0 ${c}`, `-1px 1px 0 ${c}`
+    );
   }
   if (themeStyle.shadow && themeStyle.shadow !== "none") {
     textShadowParts.push(themeStyle.shadow);

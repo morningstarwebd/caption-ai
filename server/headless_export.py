@@ -21,7 +21,7 @@ RESOLUTION_MAP = {
     "480p": (854, 480),
 }
 
-RENDER_PAGE_URL = "http://localhost:3000/render"
+RENDER_PAGE_URL = os.getenv("RENDER_PAGE_URL", "http://localhost:3000/render")
 EXPORT_FPS = 30
 
 
@@ -91,10 +91,10 @@ async def export_headless(
         # Wait for the page to be ready
         await page.wait_for_function("() => window.__RENDER_PAGE_LOADED__ === true", timeout=10000)
 
-        # Inject caption data
-        escaped_json = captions_json.replace("\\", "\\\\").replace("`", "\\`").replace("$", "\\$")
+        # Inject caption data via proper serialization (avoids string escaping issues)
         inject_result = await page.evaluate(
-            f"() => window.setCaptionData(`{escaped_json}`, '{theme}', {width}, {height})"
+            "([json, t, w, h]) => window.setCaptionData(json, t, w, h)",
+            [captions_json, theme, width, height]
         )
         if not inject_result:
             await browser.close()
@@ -178,8 +178,13 @@ async def export_headless(
 
         # Check FFmpeg result
         if ffmpeg_proc.returncode != 0:
-            stderr_out = await ffmpeg_proc.stderr.read() if ffmpeg_proc.stderr else b""
-            logger.error(f"FFmpeg failed: {stderr_out.decode()}")
+            stderr_out = b""
+            if ffmpeg_proc.stderr:
+                try:
+                    stderr_out = await ffmpeg_proc.stderr.read()
+                except Exception:
+                    pass
+            logger.error(f"FFmpeg failed (exit {ffmpeg_proc.returncode}): {stderr_out.decode(errors='replace')}")
             raise RuntimeError(f"FFmpeg compositing failed (exit code {ffmpeg_proc.returncode})")
 
         await progress_callback("export_complete", 100, "Done!")
