@@ -12,7 +12,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688.svg)](https://fastapi.tiangolo.com)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-[Features](#-features) · [Demo](#-demo) · [Quick Start](#-quick-start) · [Architecture](#-architecture) · [Contributing](#-contributing)
+[Features](#-features) · [Demo](#-demo) · [Quick Start](#-quick-start) · [Setup Wizard (Windows)](#-setup-wizard-windows) · [Architecture](#-architecture) · [Contributing](#-contributing)
 
 </div>
 
@@ -117,6 +117,41 @@ npm run dev
 ```
 
 Open **[http://localhost:3000](http://localhost:3000)** and start captioning! 🎉
+
+---
+
+## 🧙 Setup Wizard (Windows)
+
+The project now includes a Windows setup wizard in the [wizard](wizard) folder.
+
+### Run Wizard (normal mode)
+
+```bash
+python -m wizard.wizard
+```
+
+### Run Wizard (dry-run mode)
+
+Dry-run mode tests the full UI flow without performing real installs or writing `.env` / `start.bat`.
+
+```bash
+python -m wizard.wizard --dry-run
+```
+
+You can also enable dry-run using an environment variable:
+
+```powershell
+$env:CAPTION_AI_WIZARD_DRY_RUN="1"
+python -m wizard.wizard
+```
+
+### Build `.exe` Wizard
+
+```bat
+wizard\build.bat
+```
+
+`build.bat` auto-uses `wizard/icon.ico` if present; otherwise it builds without an icon.
 
 ---
 
